@@ -1,3 +1,5 @@
+namespace AdventOfCode.Days
+{
 public static class Day1 {
     public static int Problem1(string[] input) {
         var maxSum = 0;
@@ -46,3 +48,4 @@ public static class Day1 {
         return firstSum + secondSum + thirdSum;
     }
  }
+}
