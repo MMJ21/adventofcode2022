@@ -36,8 +36,8 @@ namespace AdventOfCode.Days
                 var first = ConvertIntoIntArray(pair[0].TrimStart());
                 var second = ConvertIntoIntArray(pair[1].TrimEnd());
 
-                if ((first[0] >= first[1] && first[0] <= second[1])
-                    || (first[1] >= first[0] && first[1] <= second[0]))
+                if ((first[0] >= second[0] && first[0] <= second[1])
+                    || (second[0] >= first[0] && second[0] <= first[1]))
                 {
                     result++;
                 }
