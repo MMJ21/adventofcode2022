@@ -66,19 +66,19 @@ namespace AdventOfCode.Days
             new Stack("9")
         };
         
-        public static string Problem1(string[] inputStack, string[] inputMoves)
-        {   
+        private static void InitializeStacks(string[] inputStack)
+        {
             // Get stack count
             var stackCount = stacks.Length;
 
             // Initialize stacks
-            for (int i = inputStack.Length - 1; i >= 0; i--) 
+            for (var i = inputStack.Length - 1; i >= 0; i--) 
             {
                 var pointer = 0;
 
                 var line = inputStack[i];
 
-                for(int j = 1; j <= stackCount; j++)
+                for (var j = 1; j <= stackCount; j++)
                 {
                     if (j == 1) 
                     {
@@ -95,6 +95,10 @@ namespace AdventOfCode.Days
                     pointer += 4;
                 }
             }
+        }
+        public static string Problem1(string[] inputStack, string[] inputMoves)
+        {   
+            InitializeStacks(inputStack);
 
             // Execute instructions
             foreach (string line in inputMoves) 
@@ -108,6 +112,41 @@ namespace AdventOfCode.Days
                 {
                     stacks[finalStack - 1].Push(stacks[initialStack - 1].Pop());
                 }
+            }
+
+            //Create result string
+            var result = "";
+
+            foreach (var stack in stacks)
+            {
+                result += stack.Peek();
+            }
+
+            return result;
+        }
+
+        public static string Problem2(string[] inputStack, string[] inputMoves)
+        {
+            InitializeStacks(inputStack);
+
+            // Execute instructions
+            foreach (string line in inputMoves)
+            {
+                var split = line.Split(" ");
+                var count = Int32.Parse(split[1]);
+                var initialStack = Int32.Parse(split[3]);
+                var finalStack = Int32.Parse(split[5]);
+                var toPush = "";
+
+                for (var i = 0; i < count; i++)
+                {
+                    toPush += stacks[initialStack - 1].Pop();
+                }
+
+                for (var j = toPush.Length - 1; j >= 0; j--)
+                {
+                    stacks[finalStack - 1].Push(toPush[j]);
+                } 
             }
 
             //Create result string
